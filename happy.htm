@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html >
+<head>
+<style>
+table, th , td  {
+  color:maroon;
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 10px;
+}
+table tr:nth-child(odd) {
+  background-color: violet;
+}
+table tr:nth-child(even) {
+  background-color: dodgerblue;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+ 
+<div ng-app="myApp" ng-controller="customersCtrl">
+ 
+<table>
+  <tr ng-repeat="x in names">
+    <td>{{ x.rollno}}</td>
+    <td>{{ x.name }}</td>
+    <td>{{ x.degree}}</td>
+    <td>{{ x.department}}</td>
+    <td>{{ x.fees}}</td>
+  </tr>
+</table>
+ 
+</div>
+
+ <form action="student_home.htm">
+
+ <input type="submit"   value="back">
+
+ </form>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+   $http.get("students_mysql.php").then(function(response){$scope.names = response.data.records;});
+});
+</script>
+
+ 
+</body>
+</html>

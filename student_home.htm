@@ -1,0 +1,87 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<script>
+ function hello()
+{
+window.location.href ="happy.htm";
+}
+</script>
+
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+<form>
+
+rollno :<input type="text"  ng-model="rollno"/>
+<br><br>
+name :<input type="text"  ng-model="name"/>
+<br><br>
+degree :<input type="text"  ng-model="degree"/>
+<br><br>
+department :<input type="text"  ng-model="department"/>
+<br><br>
+fees :<input type="text"  ng-model="fees"/>
+<br><br>
+<input type="submit" ng-click="insertdata()" value="Insert records"/>
+<br><br>
+<input type="submit" ng-click="updatedata()" value="update records"/>
+<br><br>
+<input type="submit" ng-click="deletedata()" value="delete records"/>
+<br><br>
+<input type="submit" onclick="hello()" value="view records">
+
+</form>
+
+<script>
+
+var app=angular.module("myApp",[]);
+app.controller("myCtrl",function($scope,$http) {
+
+$scope.insertdata=function(){
+
+$http.post("insert.php",{'rollno':$scope.rollno, 'name':$scope.name, 'degree':$scope.degree, 'department':$scope.department, 'fees':$scope.fees}).success(function(data){
+alert(data);
+$scope.rollno=null;
+$scope.name=null;
+$scope.degree=null;
+$scope.department=null;
+$scope.fees=null;
+
+});
+
+}
+
+
+$scope.updatedata=function(){
+
+$http.post("update.php",{'rollno':$scope.rollno, 'name':$scope.name, 'degree':$scope.degree, 'department':$scope.department, 'fees':$scope.fees}).success(function(data){
+alert(data);
+$scope.rollno=null;
+$scope.name=null;
+$scope.degree=null;
+$scope.department=null;
+$scope.fees=null;
+
+});
+
+}
+
+$scope.deletedata=function() {
+
+$http.post("delete.php",{'rollno':$scope.rollno}).success(function(data){  
+alert(data);  
+$scope.rollno=null;
+});
+
+}
+
+
+});
+
+
+</script>
+</body>
+</html>
+
